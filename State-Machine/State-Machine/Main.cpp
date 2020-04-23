@@ -2,11 +2,31 @@
 //
 
 #include <iostream>
-#include "State.h"
+#include "StateMachine.h"
+#include <windows.h>
+
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    bool A = false;
+    bool condition1=false;
+    StateMachine Machine;
+    while (true) {
+        if (GetAsyncKeyState('A') & 0x8000 && !A) {
+            A = true;
+            cout << "Nique tes morts C++\n";
+        }
+        else if (GetAsyncKeyState('A') == 0) {
+            A= false;
+        }
+        if (GetKeyState('X') & 0x8000) {
+            return 0;
+        }
+        //Machine.CheckStates();
+    }
+    system("pause");
+    return 0;
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

@@ -1,6 +1,8 @@
 ﻿  Main.cpp
   State.cpp
   StateMachine.cpp
-  Transitions.cpp
+  Transition.cpp
+  Trigger.cpp
   Génération de code en cours...
+C:\Users\Esteban\Desktop\IA-JV\IA-JV\State-Machine\State-Machine\Trigger.h(63): warning C4715: 'Trigger::Check' : les chemins de contrôle ne retournent pas tous une valeur
   State-Machine.vcxproj -> C:\Users\Esteban\Desktop\IA-JV\IA-JV\State-Machine\Debug\State-Machine.exe
