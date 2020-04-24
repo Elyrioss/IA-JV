@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "StateMachine.h"
-
 #include <windows.h>
 
 using namespace std;
@@ -13,14 +12,20 @@ int main()
     
     bool A = false;
     bool Z = false;
+    bool E = false;
+
+    float anyCondition = 1;
 
     bool condition1to2 = false;
+    bool condition2to1 = false;
     int testint = 1;
 
     float SubValue = 1;
 
+    State AnyState("AnyState", 0, true);
+
     State state1("1",1,false);
-    State state2("2", 1, true);
+    State state2("2", 1, false);
 
     State substate1("S1",2, false);
     State substate2("S2",0, false);
@@ -40,16 +45,17 @@ int main()
     StateMachine SubMachine1(substates);
     state1.AddSubStateMachine(&SubMachine1);
 
-
-
     //trigger et transition
+    Trigger AnyTrig(&anyCondition,2,1); // Le trigger sera le bool anyCondition
+    Transition AnyTrans(&AnyState, &AnyTrig);
+
     //Etat 1 vers 2 
     Trigger Trig1to2(&condition1to2); // Le trigger sera le bool condition1to2
     Transition Trans1to2(&state2, &Trig1to2);
     state1.AddTransition(&Trans1to2,0);
 
     //Etat 2 vers 1 
-    Trigger Trig2to1(&testint, 2, 1); //Trigger est testint > a une valeur
+    Trigger Trig2to1(&condition2to1); //Trigger est testint > a une valeur
     Transition Trans2to1(&state1, &Trig2to1);
     state2.AddTransition(&Trans2to1,0);
 
@@ -57,18 +63,20 @@ int main()
     std::vector<State> states(2);
     states[0] = state1;
     states[1] = state2;
+    //StateMachine Machine(states,&AnyState,&AnyTrans);
     StateMachine Machine(states);
 
-    StateMachine SM(states);
     cout << "Etat : " << Machine.Current.Name << " and sub state : " + Machine.Current.Sub->Current.Name +"\n";
     while (true) {
         if (GetAsyncKeyState('A') & 0x8000 && !A) {
             A = true;
             if (condition1to2) {
                 condition1to2 = false;
+                condition2to1 = true;
             }
             else {
                 condition1to2 = true;
+                condition2to1 = false;
             }           
         }
         else if (GetAsyncKeyState('A') == 0) {
@@ -81,6 +89,14 @@ int main()
         }
         else if (GetAsyncKeyState('Z') == 0) {
             Z = false;
+        }
+
+        if (GetAsyncKeyState('E') & 0x8000 && !E) {
+            E = true;
+            SubValue = 3;
+        }
+        else if (GetAsyncKeyState('E') == 0) {
+            E = false;
         }
         if (GetKeyState('X') & 0x8000) {
             return 0;

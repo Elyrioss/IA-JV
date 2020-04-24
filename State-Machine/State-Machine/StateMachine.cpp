@@ -3,6 +3,14 @@
 
 std::string StateMachine::CheckStates()
 {
+
+	/*
+	if (ToAnyState.Trig.Check()) {
+		Current = AnyState;
+		return Current.Name;
+	}
+	*/
+
 	for (Transition T : Current.Transitions) {
 		if (T.Trig.Check()) {
 			Current = *T.End;			
@@ -23,4 +31,12 @@ StateMachine::StateMachine(std::vector<State> states)
 {
 	States = states;
 	Current = states[0];
+}
+
+StateMachine::StateMachine(std::vector<State> states, State* any, Transition* toAny)
+{
+	States = states;
+	Current = states[0];
+	AnyState = *any;
+	ToAnyState = *toAny;
 }

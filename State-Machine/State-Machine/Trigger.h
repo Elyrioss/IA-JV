@@ -25,7 +25,7 @@ class Trigger
 			type = Bool;
 		};
 
-		Trigger(bool* val) {
+		Trigger(bool* val) {			
 			type = Bool;
 			B = val;
 		};
