@@ -1,10 +1,11 @@
 #pragma once
 class Trigger
 {
-	public:
+	private: 
+
 		enum Type
 		{
-			Bool,Int,Float
+			Bool, Int, Float
 		};
 
 		Type type;
@@ -16,7 +17,9 @@ class Trigger
 		int i;
 		float f;
 
+		int Comparaison; // -1 < ; 0 = ; 1 >
 
+	public:		
 
 		Trigger() {
 			type = Bool;
@@ -27,16 +30,18 @@ class Trigger
 			B = val;
 		};
 
-		Trigger(float* val,float compare) {
+		Trigger(float* val,float compare,int comparaison) {
 			type = Float;
 			F = val;
 			f = compare;
+			Comparaison = comparaison;
 		};
 
-		Trigger(int* val, int compare) {
+		Trigger(int* val, int compare, int comparaison) {
 			type = Int;
 			I = val;
 			i = compare;
+			Comparaison = comparaison;
 		}
 
 		bool Check() {
@@ -46,21 +51,57 @@ class Trigger
 					return *B;
 					break;
 				case Trigger::Int:
-					if (*I > i) {
-						return true;
+					if (Comparaison==1) {
+						if (*I > i) {
+							return true;
+						}
+						else {
+							return false;
+						}
 					}
-					else {
-						return false;
-					}			
+					else if (Comparaison == -1) {
+						if (*I < i) {
+							return true;
+						}
+						else {
+							return false;
+						}
+					}
+					else{
+						if (*I == i) {
+							return true;
+						}
+						else {
+							return false;
+						}
+					}
+						
 					break;
 				case Trigger::Float:
-					if (*F > f) {
-						return true;
+					if (Comparaison == 1) {
+						if (*F > f) {
+							return true;
+						}
+						else {
+							return false;
+						}
+					}
+					else if (Comparaison == -1) {
+						if (*F < f) {
+							return true;
+						}
+						else {
+							return false;
+						}
 					}
 					else {
-						return false;
+						if (*F == f) {
+							return true;
+						}
+						else {
+							return false;
+						}
 					}
-					break;
 			}
 		}
 

@@ -1,20 +1,22 @@
 #include "State.h"
 
-State::State(std::string Name, int NbTransitions)
+State::State(std::string name, int NbTransitions,bool final)
 {
-	name = Name;
+	Name = name;
 	Transitions = std::vector<Transition>(NbTransitions);
+	IsFinal = final;
 }
 
 State::State()
 {
-	name = "Default";
+	Name = "Default";
 	Transitions = std::vector<Transition>(0);
+	IsFinal = false;
 }
 
-void State::AddTransition(Transition Transition,int index)
+void State::AddTransition(Transition* Transition,int index)
 {
-	Transitions[index] =Transition;
+	Transitions[index] =*Transition;
 }
 
 void State::AddTransition(State* S,Trigger* TransTrig,int index)

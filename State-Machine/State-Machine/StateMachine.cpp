@@ -6,10 +6,10 @@ std::string StateMachine::CheckStates()
 	for (Transition T : Current.Transitions) {
 		if (T.Trig.Check()) {
 			Current = *T.End;
-			return Current.name;
+			return Current.Name;
 		}
 	}
-	return Current.name;
+	return Current.Name;
 }
 
 StateMachine::StateMachine()
