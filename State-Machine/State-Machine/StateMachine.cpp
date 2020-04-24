@@ -9,7 +9,7 @@ std::string StateMachine::CheckStates()
 		}
 	}
 	if (Current.Sub != nullptr){
-		return Current.Name+" ,SubState "+ Current.Sub->CheckStates();
+		return Current.Name +" ,SubState "+ Current.Sub->CheckStates();
 	}
 	return Current.Name;
 }
