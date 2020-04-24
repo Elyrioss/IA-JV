@@ -12,13 +12,15 @@ State::State()
 	Transitions = std::vector<Transition>(0);
 }
 
-void State::AddTransition(Transition Transition)
+void State::AddTransition(Transition Transition,int index)
 {
-	Transitions.push_back(Transition);
+	Transitions[index] =Transition;
 }
 
-void State::AddTransition(State* S)
+void State::AddTransition(State* S,Trigger* TransTrig,int index)
 {
-	Transition A(S);
-	Transitions.push_back(A);
+	Transition A(S,TransTrig);
+	Transitions[index] = A;
 }
+
+

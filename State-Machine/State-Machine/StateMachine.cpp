@@ -1,5 +1,6 @@
 #include "StateMachine.h"
 
+
 std::string StateMachine::CheckStates()
 {
 	for (Transition T : Current.Transitions) {
@@ -13,9 +14,11 @@ std::string StateMachine::CheckStates()
 
 StateMachine::StateMachine()
 {
+	
 }
 
 StateMachine::StateMachine(std::vector<State> states)
 {
 	States = states;
+	Current = states[0];
 }

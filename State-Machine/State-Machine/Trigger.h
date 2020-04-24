@@ -16,6 +16,8 @@ class Trigger
 		int i;
 		float f;
 
+
+
 		Trigger() {
 			type = Bool;
 		};
@@ -41,7 +43,7 @@ class Trigger
 			switch (type)
 			{
 				case Trigger::Bool:
-					return B;
+					return *B;
 					break;
 				case Trigger::Int:
 					if (*I > i) {

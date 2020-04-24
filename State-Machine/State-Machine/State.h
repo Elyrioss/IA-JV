@@ -12,8 +12,8 @@ public:
 	std::string name;
 	State(std::string Name, int NbTransitions);
 	State();
-	void AddTransition(Transition transition);
-	void AddTransition(State* S);
+	void AddTransition(Transition transition,int index);
+	void AddTransition(State* S,Trigger* TransTrig,int index);
 };
 
 

@@ -10,8 +10,7 @@ class Transition
 	public:
 		State* End;
 		Trigger Trig;
-		Transition(State* S);
+		Transition(State* S,Trigger* TransTrigg);
 		Transition();
-		
 };
 
