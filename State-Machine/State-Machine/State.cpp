@@ -5,11 +5,20 @@ State::State(std::string name, int NbTransitions,bool final)
 	Name = name;
 	Transitions = std::vector<Transition>(NbTransitions);
 	IsFinal = final;
+	Sub = nullptr;
+}
+
+State::State(std::string name, int NbTransitions, bool final,StateMachine* sub)
+{
+	Name = name;
+	Transitions = std::vector<Transition>(NbTransitions);
+	IsFinal = final;
+	Sub = sub;
 }
 
 State::State()
 {
-	Name = "Default";
+	Name = "Default"; 
 	Transitions = std::vector<Transition>(0);
 	IsFinal = false;
 }
@@ -23,6 +32,11 @@ void State::AddTransition(State* S,Trigger* TransTrig,int index)
 {
 	Transition A(S,TransTrig);
 	Transitions[index] = A;
+}
+
+void State::AddSubStateMachine(StateMachine* sub)
+{
+	Sub = sub;
 }
 
 

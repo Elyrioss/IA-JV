@@ -5,9 +5,11 @@ std::string StateMachine::CheckStates()
 {
 	for (Transition T : Current.Transitions) {
 		if (T.Trig.Check()) {
-			Current = *T.End;
-			return Current.Name;
+			Current = *T.End;			
 		}
+	}
+	if (Current.Sub != nullptr){
+		return Current.Name+" ,SubState "+ Current.Sub->CheckStates();
 	}
 	return Current.Name;
 }

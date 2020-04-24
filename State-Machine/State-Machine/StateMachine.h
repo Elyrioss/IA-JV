@@ -5,6 +5,7 @@
 #include "State.h"
 #include "Transition.h"
 
+class SubStateMachine;
 class StateMachine
 {
 	public:
