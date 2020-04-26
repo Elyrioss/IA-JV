@@ -4,21 +4,19 @@
 std::string StateMachine::CheckStates()
 {
 
-	/*
-	if (ToAnyState.Trig.Check()) {
-		Current = AnyState;
-		return Current.Name;
-	}
-	*/
 
 	for (Transition T : Current.Transitions) {
 		if (T.Trig.Check()) {
 			Current = *T.End;			
 		}
 	}
-	if (Current.Sub != nullptr){
-		return Current.Name +" ,SubState "+ Current.Sub->CheckStates();
-	}
+	/*if (Current.Sub != nullptr){
+		if (Current.ToSub1.Trig.Check()) {
+			Current = Current.Sub->Current;
+		}		
+		//return Current.Name +" ,SubState "+ Current.Sub->CheckStates();
+	}*/
+
 	return Current.Name;
 }
 

@@ -34,9 +34,10 @@ void State::AddTransition(State* S,Trigger* TransTrig,int index)
 	Transitions[index] = A;
 }
 
-void State::AddSubStateMachine(StateMachine* sub)
+void State::AddSubStateMachine(StateMachine* sub,Transition toSub1)
 {
 	Sub = sub;
+	ToSub1 = toSub1;
 }
 
 
