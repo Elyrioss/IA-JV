@@ -20,7 +20,6 @@ public:
 	void AddTransition(Transition* transition,int index);
 	void AddTransition(State* S,Trigger* TransTrig,int index);
 	void AddSubStateMachine(StateMachine* sub,Transition toSub1);
-
 	StateMachine* Sub;
 	Transition ToSub1;
 };

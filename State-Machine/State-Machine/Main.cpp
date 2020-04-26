@@ -19,6 +19,8 @@ int main()
     bool U = false;
     bool I = false;
 
+
+    //Conditions pour trigger les changement d'etats
     bool condition1to2 = false;//A
     bool condition2to1 = false;//A
 
@@ -39,13 +41,15 @@ int main()
 
     bool conditionFromAny = true;
 
+
+    //Création des états (nom,nombre de transitions,etat final ou non)
     State state1("1",3,false);
     State state2("2", 2, false);
 
-    State AnyState("AnyState", 1, false);
-    Trigger TrigtoAny(&conditionToAny); 
-    Transition TransAny(&AnyState, &TrigtoAny);
 
+    State AnyState("AnyState", 1, false);
+    Trigger TrigtoAny(&conditionToAny); // Le trigger de la transition sera le bool conditionToAny 
+    Transition TransAny(&AnyState, &TrigtoAny);
     Trigger TrigAnyto1(&conditionFromAny);
     Transition TransAnyTo(&state1, &TrigAnyto1);
     AnyState.AddTransition(&TransAnyTo, 0);
@@ -55,7 +59,6 @@ int main()
     State substate3("S3",2, false);
 
     //Trigger subMachine
-
     Trigger TrigS1toS2(&conditionS1toS2);
     Transition TransS1toS2(&substate2, &TrigS1toS2);
     substate1.AddTransition(&TransS1toS2,0);
@@ -87,11 +90,11 @@ int main()
     substates[2] = substate3;
     StateMachine SubMachine1(substates);
 
-    Trigger Trig1toS1(&condition1toS1); // Le trigger sera le bool condition1to2
+    Trigger Trig1toS1(&condition1toS1); 
     Transition Trans1toS1(&substate1, &Trig1toS1);
     
     //Etat 1 vers 2 
-    Trigger Trig1to2(&condition1to2); // Le trigger sera le bool condition1to2
+    Trigger Trig1to2(&condition1to2); 
     Transition Trans1to2(&state2, &Trig1to2);
     state1.AddTransition(&TransAny, 0);
     state1.AddTransition(&Trans1to2,1);
@@ -99,7 +102,7 @@ int main()
     state1.AddSubStateMachine(&SubMachine1, Trans1toS1);
 
     //Etat 2 vers 1 
-    Trigger Trig2to1(&condition2to1); //Trigger est testint > a une valeur
+    Trigger Trig2to1(&condition2to1);
     Transition Trans2to1(&state1, &Trig2to1);
     state2.AddTransition(&TransAny, 0);
     state2.AddTransition(&Trans2to1,1);
@@ -109,6 +112,9 @@ int main()
     states[0] = state1;
     states[1] = state2;
     StateMachine Machine(states);
+
+
+    //Boucle principale pour les inputs
     while (true) {
         if (GetAsyncKeyState('A') & 0x8000 && !A) {
             A = true;
@@ -201,11 +207,13 @@ int main()
             return 0;
         }
 
-        cout << "Etat : " << Machine.CheckStates() << " \n";
+        
         if (Machine.Current.IsFinal) {
-            //cout << "L'Etat " << Machine.CheckStates() << " est Terminal, fin du programme\n";
+            cout << "L'Etat " << Machine.CheckStates() << " est Terminal, fin du programme\n";
             return 0;
         }
+
+        cout << "Etat : " << Machine.CheckStates() << " \n";
     }
     //system("pause");
     return 0;

@@ -10,13 +10,14 @@ std::string StateMachine::CheckStates()
 			Current = *T.End;			
 		}
 	}
-	/*if (Current.Sub != nullptr){
+	/*
+	if (Current.Sub != nullptr){
 		if (Current.ToSub1.Trig.Check()) {
 			Current = Current.Sub->Current;
 		}		
 		//return Current.Name +" ,SubState "+ Current.Sub->CheckStates();
-	}*/
-
+	}
+	*/
 	return Current.Name;
 }
 
